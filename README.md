@@ -104,3 +104,9 @@ CLPopoverManager.dismissAll()
 
 **PS**:心中感慨良多，奈何腹中无墨，一个字总结——懒。
 
+## cocoapods
+
+```swift
+pod ' CLPopoverManager'
+```
+

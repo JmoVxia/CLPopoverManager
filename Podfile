@@ -10,6 +10,8 @@ target 'CLPopoverManagerDemo' do
     pod 'LookinServer', :subspecs => ['Swift'], :configurations => ['Debug']
     pod 'SwiftFormat/CLI', :configurations => ['Debug']
     pod 'SnapKit'
+    pod 'lottie-ios'
+    pod 'DateToolsSwift'
 end
 
 post_install do |installer|
