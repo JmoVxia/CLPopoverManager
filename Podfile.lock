@@ -1,0 +1,34 @@
+PODS:
+  - DateToolsSwift (5.0.0)
+  - LookinServer/Core (1.2.8)
+  - LookinServer/Swift (1.2.8):
+    - LookinServer/Core
+  - lottie-ios (4.4.1)
+  - SnapKit (5.7.1)
+  - SwiftFormat/CLI (0.57.2)
+
+DEPENDENCIES:
+  - DateToolsSwift
+  - LookinServer/Swift
+  - lottie-ios
+  - SnapKit
+  - SwiftFormat/CLI
+
+SPEC REPOS:
+  trunk:
+    - DateToolsSwift
+    - LookinServer
+    - lottie-ios
+    - SnapKit
+    - SwiftFormat
+
+SPEC CHECKSUMS:
+  DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
+  LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
+  lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SwiftFormat: 7a87845c4d54d5c1600e46b4d2d02408aab3a129
+
+PODFILE CHECKSUM: 53c2d1368869aaa270ecfdce9c760d87ebc8edae
+
+COCOAPODS: 1.16.2

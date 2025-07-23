@@ -95,6 +95,7 @@ public extension CLPopoverManager {
         mainSync {
             guard let window = shared.windows[key] else { return }
             window.rootPopoverController?.dismissAnimation {
+                window.isHidden = true
                 completion?()
                 shared.waitQueue.removeValue(forKey: key)
                 shared.windows.removeValue(forKey: key)
@@ -109,6 +110,7 @@ public extension CLPopoverManager {
     static func dismissAll() {
         mainSync {
             shared.waitQueue.removeAll()
+            shared.windows.values.forEach({ $0.isHidden = true })
             shared.windows.removeAll()
             manager = nil
         }

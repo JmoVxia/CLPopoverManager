@@ -1,0 +1,6 @@
+module Pods_CLPopoverManagerDemo {
+  umbrella header "Pods-CLPopoverManagerDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -22,7 +22,7 @@ class CLPopupDataPickerController: CLPopoverController {
     var hourMinuteCallback: ((Int, Int) -> Void)?
     var yearMonthDayHourMinuteCallback: ((Int, Int, Int, Int, Int) -> Void)?
     var durationCallback: ((String, String) -> Void)?
-    var selectedCallback: ((String) -> Void)? = nil
+    var selectedCallback: ((String) -> Void)?
     var type: CLDataPickerType = .yearMonthDay
     var unit: String?
     var space: CGFloat = -10
