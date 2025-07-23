@@ -109,4 +109,11 @@ CLPopoverManager.dismissAll()
 ```swift
 pod ' CLPopoverManager'
 ```
+### Swift Package Manager
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/JmoVxia/CLPopoverManager.git", from: "0.0.2")
+]
+```
 
