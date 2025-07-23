@@ -25,7 +25,7 @@ import UIKit
 
         guard allowsEventPenetration else { return view }
 
-        autoHideWhenPenetrated ? (rootViewController as? (CLPopoverController & CLPopoverProtocol))?.dismissAnimation(completion: nil) : ()
+        autoHideWhenPenetrated ? CLPopoverManager.dismiss(rootPopoverController?.key, completion: nil) : ()
 
         return nil
     }

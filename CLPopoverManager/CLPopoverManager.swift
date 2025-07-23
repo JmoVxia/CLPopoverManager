@@ -19,6 +19,8 @@ import UIKit
     private var waitQueue = [String: (controller: CLPopoverProtocol, enqueueTime: Date)]()
 
     private var windows = [String: CLPopoverWindow]()
+    
+    private var dismissingKeys = Set<String>()
 }
 
 public extension CLPopoverManager {
@@ -94,15 +96,18 @@ public extension CLPopoverManager {
     static func dismiss(_ key: String?, completion: (() -> Void)? = nil) {
         guard let key else { return }
         mainSync {
+            guard !shared.dismissingKeys.contains(key) else { return }
             guard let window = shared.windows[key] else {
                 shared.waitQueue.removeValue(forKey: key)
                 completion?()
                 return
             }
+            shared.dismissingKeys.insert(key)
             window.rootPopoverController?.dismissAnimation {
                 window.isHidden = true
                 completion?()
                 shared.windows.removeValue(forKey: key)
+                shared.dismissingKeys.remove(key)
                 guard !(shared.windows.isEmpty && shared.waitQueue.isEmpty) else { return dismissAll() }
                 guard let nextController = shared.waitQueue.values.sorted(by: {
                     $0.controller.config.popoverPriority != $1.controller.config.popoverPriority ?
@@ -117,6 +122,7 @@ public extension CLPopoverManager {
     /// 隐藏所有弹窗
     static func dismissAll() {
         mainSync {
+            shared.dismissingKeys.removeAll()
             shared.waitQueue.removeAll()
             shared.windows.values.forEach({ $0.isHidden = true })
             shared.windows.removeAll()
