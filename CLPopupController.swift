@@ -232,7 +232,7 @@ extension CLPopupController {
 
     func showLoading() {
         CLPopoverManager.showLoading()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 6) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
             CLPopoverManager.dismissAll()
         }
     }

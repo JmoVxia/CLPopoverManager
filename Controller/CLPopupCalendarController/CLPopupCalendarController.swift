@@ -172,14 +172,13 @@ extension CLPopupCalendarController {}
     func sureAction() {
         guard let start = calendarView.beginDate else { return }
         guard let end = calendarView.endDate else { return }
-
-        dismissAnimation {
+        CLPopoverManager.dismiss(key) {
             self.dismissCallback?(start, end)
         }
     }
 
     func close() {
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
 
@@ -211,7 +210,6 @@ extension CLPopupCalendarController: CLPopoverProtocol {
             self.view.layoutIfNeeded()
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }

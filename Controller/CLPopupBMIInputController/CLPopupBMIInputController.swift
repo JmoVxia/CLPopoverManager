@@ -320,7 +320,7 @@ extension CLPopupBMIInputController {
         DispatchQueue.main.async {
             self.view.endEditing(true)
         }
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
 
@@ -351,7 +351,6 @@ extension CLPopupBMIInputController: CLPopoverProtocol {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }

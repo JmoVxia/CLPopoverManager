@@ -75,12 +75,11 @@ extension CLPopupMomentumController: CLPopoverProtocol {
             self.view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
             self.momentumView.closedTransform = .init(translationX: 0, y: height)
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }
 
     @objc private func hiddenAction() {
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }

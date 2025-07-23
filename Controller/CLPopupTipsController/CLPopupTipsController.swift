@@ -71,7 +71,7 @@ extension CLPopupTipsController: CLPopoverProtocol {
             self.backgroundView.alpha = 1.0
         }, completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + self.dismissInterval) {
-                self.dismissAnimation {
+                CLPopoverManager.dismiss(self.key) {
                     self.dissmissCallBack?()
                 }
             }
@@ -82,7 +82,6 @@ extension CLPopupTipsController: CLPopoverProtocol {
         UIView.animate(withDuration: 0.35, animations: {
             self.backgroundView.alpha = 0.0
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }

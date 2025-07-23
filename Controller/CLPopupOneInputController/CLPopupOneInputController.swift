@@ -265,7 +265,7 @@ extension CLPopupOneInputController {
         DispatchQueue.main.async {
             self.view.endEditing(true)
         }
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
 
@@ -298,7 +298,6 @@ extension CLPopupOneInputController: CLPopoverProtocol {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }

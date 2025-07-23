@@ -322,7 +322,7 @@ extension CLPopupTwoInputController {
         DispatchQueue.main.async {
             self.view.endEditing(true)
         }
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
 
@@ -354,7 +354,6 @@ extension CLPopupTwoInputController: CLPopoverProtocol {
             self.view.layoutIfNeeded()
         }) { _ in
             completion?()
-            CLPopoverManager.dismiss(self.key)
         }
     }
 }

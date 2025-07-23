@@ -187,7 +187,6 @@ extension CLPopupMessageController: CLPopoverProtocol {
             self.view.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)
             self.contentView.alpha = 0.0
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }
@@ -195,21 +194,21 @@ extension CLPopupMessageController: CLPopoverProtocol {
 
 extension CLPopupMessageController {
     @objc func sureButtonAction() {
-        dismissAnimation {
+        CLPopoverManager.dismiss(key) {
             self.sureCallBack?()
             self.sureCallBack = nil
         }
     }
 
     @objc func leftButtonAction() {
-        dismissAnimation {
+        CLPopoverManager.dismiss(key) {
             self.leftCallBack?()
             self.leftCallBack = nil
         }
     }
 
     @objc func rightButtonAction() {
-        dismissAnimation {
+        CLPopoverManager.dismiss(key) {
             self.rightCallBack?()
             self.rightCallBack = nil
         }

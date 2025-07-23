@@ -19,7 +19,7 @@ import UIKit
     private var waitQueue = [String: (controller: CLPopoverProtocol, enqueueTime: Date)]()
 
     private var windows = [String: CLPopoverWindow]()
-    
+
     private var dismissingKeys = Set<String>()
 }
 
@@ -65,11 +65,11 @@ public extension CLPopoverManager {
             case .queue, .interrupt:
                 break
             case .replace:
-                shared.windows.values.forEach({ $0.isHidden = true })
+                shared.windows.values.forEach { $0.isHidden = true }
                 shared.windows.removeAll()
             case .unique:
                 shared.waitQueue.removeAll()
-                shared.windows.values.forEach({ $0.isHidden = true })
+                shared.windows.values.forEach { $0.isHidden = true }
                 shared.windows.removeAll()
             }
             guard !(controller.config.popoverMode == .queue && !shared.windows.isEmpty) else {
@@ -124,7 +124,7 @@ public extension CLPopoverManager {
         mainSync {
             shared.dismissingKeys.removeAll()
             shared.waitQueue.removeAll()
-            shared.windows.values.forEach({ $0.isHidden = true })
+            shared.windows.values.forEach { $0.isHidden = true }
             shared.windows.removeAll()
             manager = nil
         }

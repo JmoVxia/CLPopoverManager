@@ -269,13 +269,12 @@ extension CLPopoverHudController: CLPopoverProtocol {
         switch animationType {
         case .success:
             successAnimation()
-            CLPopoverManager.dismiss(key)
         case .error:
             errorAnimation()
-            CLPopoverManager.dismiss(key)
         case .loading:
             loadingAnimation()
         }
+        CLPopoverManager.dismiss(key)
     }
 
     func dismissAnimation(completion: (() -> Void)? = nil) {

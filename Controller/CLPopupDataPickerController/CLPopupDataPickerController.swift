@@ -147,7 +147,6 @@ extension CLPopupDataPickerController: CLPopoverProtocol {
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
         }) { _ in
-            CLPopoverManager.dismiss(self.key)
             completion?()
         }
     }
@@ -155,7 +154,7 @@ extension CLPopupDataPickerController: CLPopoverProtocol {
 
 extension CLPopupDataPickerController {
     @objc func cancelAction() {
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 
     @objc func sureAction() {
@@ -170,13 +169,13 @@ extension CLPopupDataPickerController {
         } else if let picker = dataPicker as? CLDurationDataPickerView {
             durationCallback?(String(format: "%02d", picker.duration), picker.unit)
         }
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
 
 extension CLPopupDataPickerController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        dismissAnimation(completion: nil)
+        CLPopoverManager.dismiss(key)
     }
 }
