@@ -184,7 +184,14 @@ extension CLPopupController: UITableViewDelegate {
 
 extension CLPopupController {
     func showFlop() {
-        CLPopoverManager.showFlop()
+        let controller = CLPopupFlopController()
+        controller.config.popoverMode = .interrupt
+        CLPopoverManager.show(controller)
+        CLPopoverManager.show(controller)
+        CLPopoverManager.show(controller)
+        CLPopoverManager.show(controller)
+        CLPopoverManager.show(controller)
+        CLPopoverManager.show(controller)
     }
 
     func showCalendar() {
@@ -204,6 +211,7 @@ extension CLPopupController {
             configure.supportedInterfaceOrientations = .all
             configure.allowsEventPenetration = true
             configure.autoHideWhenPenetrated = true
+            configure.popoverMode = .interrupt
             configure.userInterfaceStyleOverride = .unspecified
         }, title: "我是一个按钮", message: "我有一个按钮")
     }

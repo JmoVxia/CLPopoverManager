@@ -16,6 +16,8 @@ import UIKit
 
     deinit {}
 
+    private static let shared = CLPopoverManager()
+
     private var waitQueue = [String: (controller: CLPopoverProtocol, enqueueTime: Date)]()
 
     private var windows = [String: CLPopoverWindow]()
@@ -24,25 +26,23 @@ import UIKit
 }
 
 public extension CLPopoverManager {
-    @discardableResult static func mainSync<T>(execute block: () -> T) -> T {
-        guard !Thread.isMainThread else { return block() }
-        return DispatchQueue.main.sync { block() }
-    }
-}
-
-public extension CLPopoverManager {
-    private static let shared = CLPopoverManager()
-}
-
-public extension CLPopoverManager {
     /// 显示自定义弹窗
     static func show(_ controller: CLPopoverProtocol, completion: (() -> Void)? = nil) {
-        mainSync {
-            let shouldShow = !shared.windows.values.contains { $0.rootPopoverController?.config.popoverMode == .unique } &&
-                !shared.windows.values.contains { $0.rootPopoverController?.config.identifier == controller.config.identifier && controller.config.identifier != nil } &&
-                !shared.waitQueue.values.contains { $0.controller.key != controller.key && $0.controller.config.identifier == controller.config.identifier && controller.config.identifier != nil }
+        DispatchQueue.main.async {
+            guard !shared.windows.values.contains(where: { window in
+                guard let root = window.rootPopoverController else { return false }
+                return root.config.popoverMode == .unique
+                    || root.key == controller.key
+                    || (root.config.identifier != nil && root.config.identifier == controller.config.identifier)
+            }) else {
+                return
+            }
 
-            guard shouldShow else { return }
+            guard !shared.waitQueue.values.contains(where: { waitController, _ in
+                waitController.config.identifier != nil && waitController.config.identifier == controller.config.identifier
+            }) else {
+                return
+            }
 
             switch controller.config.popoverMode {
             case .queue, .interrupt:
@@ -78,7 +78,7 @@ public extension CLPopoverManager {
     /// 隐藏指定弹窗
     static func dismiss(_ key: String?, completion: (() -> Void)? = nil) {
         guard let key else { return }
-        mainSync {
+        DispatchQueue.main.async {
             guard !shared.dismissingKeys.contains(key) else { return }
             guard let window = shared.windows[key] else {
                 shared.waitQueue.removeValue(forKey: key)
@@ -104,7 +104,7 @@ public extension CLPopoverManager {
 
     /// 隐藏所有弹窗
     static func dismissAll() {
-        mainSync {
+        DispatchQueue.main.async {
             shared.dismissingKeys.removeAll()
             shared.waitQueue.removeAll()
             shared.windows.values.forEach { $0.isHidden = true }
