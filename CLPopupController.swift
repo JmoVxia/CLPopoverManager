@@ -42,7 +42,7 @@ extension CLPopupController {
     func initData() {
         do {
             let model = CLPopupModel()
-            model.title = "翻牌弹窗"
+            model.title = "翻牌弹窗(多次调用去重)"
             model.callback = { [weak self] in
                 self?.showFlop()
             }
@@ -50,7 +50,7 @@ extension CLPopupController {
         }
         do {
             let model = CLPopupModel()
-            model.title = "日历弹窗"
+            model.title = "日历弹窗(排队)"
             model.callback = { [weak self] in
                 self?.showCalendar()
             }
@@ -58,7 +58,7 @@ extension CLPopupController {
         }
         do {
             let model = CLPopupModel()
-            model.title = "可拖拽弹窗"
+            model.title = "可拖拽弹窗(重叠)"
             model.callback = { [weak self] in
                 self?.showDragView()
             }
@@ -66,7 +66,7 @@ extension CLPopupController {
         }
         do {
             let model = CLPopupModel()
-            model.title = "一个按钮"
+            model.title = "一个按钮(惟一,移除之前,阻止后续弹窗)"
             model.callback = { [weak self] in
                 self?.showOneAlert()
             }
@@ -74,7 +74,7 @@ extension CLPopupController {
         }
         do {
             let model = CLPopupModel()
-            model.title = "两个按钮"
+            model.title = "两个按钮(替换,会去除之前的,但是不阻止之后的)"
             model.callback = { [weak self] in
                 self?.showTwoAlert()
             }
@@ -196,6 +196,7 @@ extension CLPopupController {
 
     func showCalendar() {
         CLPopoverManager.showCalendar()
+        CLPopoverManager.showFlop()
     }
 
     func showDragView() {
@@ -203,9 +204,6 @@ extension CLPopupController {
             configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
         }
-    }
-
-    func showOneAlert() {
         CLPopoverManager.showOneAlert(configCallback: { configure in
             configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
@@ -216,11 +214,29 @@ extension CLPopupController {
         }, title: "我是一个按钮", message: "我有一个按钮")
     }
 
-    func showTwoAlert() {
-        CLPopoverManager.showTwoAlert(configCallback: { configure in
+    func showOneAlert() {
+        CLPopoverManager.showFlop()
+        CLPopoverManager.showOneAlert(configCallback: { configure in
             configure.shouldAutorotate = true
             configure.supportedInterfaceOrientations = .all
-        }, title: "我是两个按钮", message: "我有两个按钮")
+            configure.allowsEventPenetration = true
+            configure.autoHideWhenPenetrated = true
+            configure.popoverMode = .unique
+            configure.userInterfaceStyleOverride = .unspecified
+        }, title: "我是一个按钮", message: "我有一个按钮")
+        CLPopoverManager.showDrag()
+    }
+
+    func showTwoAlert() {
+        CLPopoverManager.showLoading()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            CLPopoverManager.showTwoAlert(configCallback: { configure in
+                configure.shouldAutorotate = true
+                configure.popoverMode = .replace
+                configure.supportedInterfaceOrientations = .all
+            }, title: "我是两个按钮", message: "我有两个按钮")
+            CLPopoverManager.showDrag()
+        }
     }
 
     func showSuccess() {
