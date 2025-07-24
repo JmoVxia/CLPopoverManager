@@ -31,24 +31,7 @@ public extension CLPopoverManager {
 }
 
 public extension CLPopoverManager {
-    private static var manager: CLPopoverManager?
-
-    private static let singletonSemaphore: DispatchSemaphore = {
-        let semap = DispatchSemaphore(value: 0)
-        semap.signal()
-        return semap
-    }()
-
-    private static var shared: CLPopoverManager {
-        singletonSemaphore.wait()
-        defer { singletonSemaphore.signal() }
-        if let sharedManager = manager {
-            return sharedManager
-        } else {
-            manager = CLPopoverManager()
-            return manager!
-        }
-    }
+    private static let shared = CLPopoverManager()
 }
 
 public extension CLPopoverManager {
@@ -126,7 +109,6 @@ public extension CLPopoverManager {
             shared.waitQueue.removeAll()
             shared.windows.values.forEach { $0.isHidden = true }
             shared.windows.removeAll()
-            manager = nil
         }
     }
 }

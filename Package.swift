@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "CLPopoverManager",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v13),
     ],
     products: [
         .library(
@@ -16,7 +16,7 @@ let package = Package(
         .target(
             name: "CLPopoverManager",
             path: "CLPopoverManager/"
-        )
+        ),
     ],
     swiftLanguageVersions: [.v5]
-) 
+)
