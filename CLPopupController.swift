@@ -74,9 +74,17 @@ extension CLPopupController {
         }
         do {
             let model = CLPopupModel()
-            model.title = "两个按钮(替换,会去除之前的,但是不阻止之后的)"
+            model.title = "两个按钮(替换之前的所有弹窗,但是不会移除排队的,也不会阻止之后的)"
             model.callback = { [weak self] in
                 self?.showTwoAlert()
+            }
+            arrayDS.append(model)
+        }
+        do {
+            let model = CLPopupModel()
+            model.title = "加载弹窗(替换之前的所有弹窗,会移除排队的,但是不会阻止之后的)"
+            model.callback = { [weak self] in
+                self?.showLoading()
             }
             arrayDS.append(model)
         }
@@ -93,14 +101,6 @@ extension CLPopupController {
             model.title = "错误弹窗"
             model.callback = { [weak self] in
                 self?.showError()
-            }
-            arrayDS.append(model)
-        }
-        do {
-            let model = CLPopupModel()
-            model.title = "加载弹窗"
-            model.callback = { [weak self] in
-                self?.showLoading()
             }
             arrayDS.append(model)
         }
@@ -229,10 +229,11 @@ extension CLPopupController {
 
     func showTwoAlert() {
         CLPopoverManager.showLoading()
+        CLPopoverManager.showSuccess()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             CLPopoverManager.showTwoAlert(configCallback: { configure in
                 configure.shouldAutorotate = true
-                configure.popoverMode = .replace
+                configure.popoverMode = .replaceActive
                 configure.supportedInterfaceOrientations = .all
             }, title: "我是两个按钮", message: "我有两个按钮")
             CLPopoverManager.showDrag()
@@ -256,8 +257,14 @@ extension CLPopupController {
 
     func showLoading() {
         CLPopoverManager.showLoading()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
-            CLPopoverManager.dismissAll()
+        CLPopoverManager.showSuccess()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            CLPopoverManager.showTwoAlert(configCallback: { configure in
+                configure.shouldAutorotate = true
+                configure.popoverMode = .replaceAll
+                configure.supportedInterfaceOrientations = .all
+            }, title: "我是两个按钮", message: "我有两个按钮")
+            CLPopoverManager.showDrag()
         }
     }
 

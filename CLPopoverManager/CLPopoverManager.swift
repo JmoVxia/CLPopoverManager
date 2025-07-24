@@ -47,10 +47,10 @@ public extension CLPopoverManager {
             switch controller.config.popoverMode {
             case .queue, .interrupt:
                 break
-            case .replace:
+            case .replaceActive:
                 shared.windows.values.forEach { $0.isHidden = true }
                 shared.windows.removeAll()
-            case .unique:
+            case .replaceAll, .unique:
                 shared.waitQueue.removeAll()
                 shared.windows.values.forEach { $0.isHidden = true }
                 shared.windows.removeAll()

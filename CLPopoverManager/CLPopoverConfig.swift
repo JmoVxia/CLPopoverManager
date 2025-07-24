@@ -67,19 +67,21 @@ import UIKit
         }
     }
 
-    public enum CLMode {
-        /// 排队
+    public enum CLDisplayMode {
+        /// 排队，如果没有正在显示，会立即显示，如果有正在显示，会加入到等待队列，后续按照优先级显示
         case queue
-        /// 插队
+        /// 插队，立即展示，可能会重叠
         case interrupt
-        /// 替换
-        case replace
-        /// 唯一
+        /// 替换当前可见的所有弹窗，但是不会移除等待中，也不影响后续弹窗
+        case replaceActive
+        /// 替换当前可见的所有弹窗，会移除等待队列，但是不影响后续弹窗
+        case replaceAll
+        /// 唯一，会移除当前可见的所有弹窗，会移除等待队列，会阻止后续所有弹窗
         case unique
     }
 
     /// 弹窗模式
-    public var popoverMode: CLMode = .queue
+    public var popoverMode: CLDisplayMode = .queue
     /// 弹窗优先级，只影响等待队列
     public var popoverPriority: CLPopoverPriority = .medium
     /// 是否允许手势穿透
