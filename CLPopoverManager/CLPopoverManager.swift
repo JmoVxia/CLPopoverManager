@@ -7,6 +7,14 @@
 
 import UIKit
 
+private extension CLPopoverManager {
+    struct CLPopoverQueueItem {
+        let controller: CLPopoverProtocol
+        let enqueueTime = Date()
+        let completion: (() -> Void)?
+    }
+}
+
 // MARK: - 弹窗管理者
 
 @objcMembers public class CLPopoverManager: NSObject {
@@ -18,7 +26,7 @@ import UIKit
 
     private static let shared = CLPopoverManager()
 
-    private var waitQueue = [String: (controller: CLPopoverProtocol, enqueueTime: Date)]()
+    private var waitQueue = [String: CLPopoverQueueItem]()
 
     private var activeWindows = [CLPopoverWindow]()
 
@@ -40,8 +48,8 @@ public extension CLPopoverManager {
                 return
             }
 
-            guard !shared.waitQueue.values.contains(where: { waitController, _ in
-                waitController.config.identifier != nil && waitController.config.identifier == controller.config.identifier
+            guard !shared.waitQueue.values.contains(where: {
+                $0.controller.config.identifier != nil && $0.controller.config.identifier == controller.config.identifier
             }) else {
                 return
             }
@@ -83,7 +91,7 @@ public extension CLPopoverManager {
                 shared.activeWindows.removeAll()
             }
             if controller.config.popoverMode == .queue, !shared.activeWindows.isEmpty {
-                shared.waitQueue[controller.key] = (controller: controller, enqueueTime: Date())
+                shared.waitQueue[controller.key] = CLPopoverQueueItem(controller: controller, completion: completion)
                 return
             }
             display(controller, completion: completion)
@@ -112,12 +120,12 @@ public extension CLPopoverManager {
                     windows.forEach { $0.isHidden = false }
                     shared.activeWindows = windows
                     shared.suspendedWindows.removeValue(forKey: key)
-                } else if let nextController = shared.waitQueue.values.sorted(by: {
+                } else if let nextItem = shared.waitQueue.values.sorted(by: {
                     $0.controller.config.popoverPriority != $1.controller.config.popoverPriority ?
                         $0.controller.config.popoverPriority > $1.controller.config.popoverPriority :
                         $0.enqueueTime < $1.enqueueTime
-                }).first?.controller {
-                    display(nextController)
+                }).first {
+                    display(nextItem.controller, completion: nextItem.completion)
                 }
             }
         }
