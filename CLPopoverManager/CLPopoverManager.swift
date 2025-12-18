@@ -148,11 +148,19 @@ public extension CLPopoverManager {
 
 private extension CLPopoverManager {
     static func display(_ controller: CLPopoverProtocol, completion: (() -> Void)? = nil) {
-        let window = CLPopoverWindow(frame: UIScreen.main.bounds)
+        let window: CLPopoverWindow = {
+            if #available(iOS 13.0, *) {
+                let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+                let preferredScene = scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
+                let popoverWindow = preferredScene.map { CLPopoverWindow(windowScene: $0) } ?? CLPopoverWindow(frame: UIScreen.main.bounds)
+                popoverWindow.overrideUserInterfaceStyle = .init(rawValue: controller.config.userInterfaceStyleOverride.rawValue) ?? .light
+                return popoverWindow
+            } else {
+                return CLPopoverWindow(frame: UIScreen.main.bounds)
+            }
+        }()
+
         window.backgroundColor = .clear
-        if #available(iOS 13.0, *) {
-            window.overrideUserInterfaceStyle = .init(rawValue: controller.config.userInterfaceStyleOverride.rawValue) ?? .light
-        }
         window.autoHideWhenPenetrated = controller.config.autoHideWhenPenetrated
         window.allowsEventPenetration = controller.config.allowsEventPenetration
         window.windowLevel = .alert + 50
