@@ -120,11 +120,13 @@ public extension CLPopoverManager {
                     windows.forEach { $0.isHidden = false }
                     shared.activeWindows = windows
                     shared.suspendedWindows.removeValue(forKey: key)
-                } else if let nextItem = shared.waitQueue.values.sorted(by: {
-                    $0.controller.config.popoverPriority != $1.controller.config.popoverPriority ?
-                        $0.controller.config.popoverPriority > $1.controller.config.popoverPriority :
-                        $0.enqueueTime < $1.enqueueTime
-                }).first {
+                } else if let nextItem = shared.waitQueue.values.max(by: { lhs, rhs in
+                    if lhs.controller.config.popoverPriority != rhs.controller.config.popoverPriority {
+                        lhs.controller.config.popoverPriority < rhs.controller.config.popoverPriority
+                    } else {
+                        lhs.enqueueTime > rhs.enqueueTime
+                    }
+                }) {
                     display(nextItem.controller, completion: nextItem.completion)
                 }
             }
