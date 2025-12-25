@@ -58,6 +58,7 @@
 		5BFA86182918A4BE006E759F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA86172918A4BE006E759F /* AppDelegate.swift */; };
 		5BFA86212918A4C0006E759F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BFA86202918A4C0006E759F /* Assets.xcassets */; };
 		5BFA86242918A4C0006E759F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFA86222918A4C0006E759F /* LaunchScreen.storyboard */; };
+		B543022C2EFCEA5000DB6DCE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543022B2EFCEA5000DB6DCE /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		5BFA86252918A4C0006E759F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61B47978CB905E35E8322CC2 /* Pods-CKDPopoverManagerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CKDPopoverManagerDemo.debug.xcconfig"; path = "Target Support Files/Pods-CKDPopoverManagerDemo/Pods-CKDPopoverManagerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		7922E0ED16DCA3E6B2723B0E /* Pods-CKDPopoverManagerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CKDPopoverManagerDemo.release.xcconfig"; path = "Target Support Files/Pods-CKDPopoverManagerDemo/Pods-CKDPopoverManagerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		B543022B2EFCEA5000DB6DCE /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +318,7 @@
 			children = (
 				5BC94EF02C1BFC6F0055C449 /* Regex.swift */,
 				5BFA86172918A4BE006E759F /* AppDelegate.swift */,
+				B543022B2EFCEA5000DB6DCE /* SceneDelegate.swift */,
 				5BC94F0D2C1BFFAF0055C449 /* CLPopupController.swift */,
 				5B09A08A2C1BED850034395A /* Controller */,
 				5BD765DA2A4A82EA0090F8F9 /* Extension */,
@@ -510,6 +513,7 @@
 				5B18C0742A4A815300AEDCA3 /* UIFont+Extension.swift in Sources */,
 				5B7C9FB62918A54800D3CB89 /* CLPopoverConfig.swift in Sources */,
 				5BFA86182918A4BE006E759F /* AppDelegate.swift in Sources */,
+				B543022C2EFCEA5000DB6DCE /* SceneDelegate.swift in Sources */,
 				5B09A0972C1BED850034395A /* CLTwoSidedView.swift in Sources */,
 				5B09A0A12C1BED850034395A /* CLPopupMessageController.swift in Sources */,
 				5B09A0A62C1BED850034395A /* CLPopupTipsController.swift in Sources */,
@@ -602,7 +606,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -657,7 +661,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -682,7 +686,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -715,7 +719,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

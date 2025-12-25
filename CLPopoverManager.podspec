@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'CLPopoverManager'
-  s.version      = '0.0.7'
+  s.version      = '0.0.8'
   s.summary      = 'CLPopoverManager'
   s.homepage     = 'https://github.com/JmoVxia/CLPopoverManager'
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
