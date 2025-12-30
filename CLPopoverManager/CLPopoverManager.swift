@@ -39,18 +39,22 @@ public extension CLPopoverManager {
     /// 显示自定义弹窗
     static func show(_ controller: CLPopoverProtocol, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
-            guard !shared.activeWindows.contains(where: { window in
-                guard let root = window.rootPopoverController else { return false }
-                return root.config.popoverMode == .unique
-                    || root.key == controller.key
-                    || (root.config.identifier != nil && root.config.identifier == controller.config.identifier)
-            }) else {
-                return
-            }
+            if shared.activeWindows.contains(where: { $0.rootPopoverController?.config.popoverMode == .unique }) { return }
 
-            guard !shared.waitQueue.values.contains(where: {
-                $0.controller.config.identifier != nil && $0.controller.config.identifier == controller.config.identifier
-            }) else {
+            let allExistingControllers: [CLPopoverProtocol] = {
+                var controllers = [CLPopoverProtocol]()
+                controllers.append(contentsOf: shared.activeWindows.compactMap(\.rootPopoverController))
+                controllers.append(contentsOf: shared.waitQueue.values.map(\.controller))
+                controllers.append(contentsOf: shared.suspendedWindows.values.flatMap { $0 }.compactMap(\.rootPopoverController))
+                return controllers
+            }()
+
+            let controllerKey = controller.key
+            let controllerIdentifier = controller.config.identifier
+
+            if allExistingControllers.contains(where: {
+                $0.key == controllerKey || (controllerIdentifier != nil && $0.config.identifier == controllerIdentifier)
+            }) {
                 return
             }
 
