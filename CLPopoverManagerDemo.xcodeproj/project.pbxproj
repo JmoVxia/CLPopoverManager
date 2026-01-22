@@ -59,6 +59,9 @@
 		B53B352E2F03782300E1E929 /* CLPopoverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B35282F03782300E1E929 /* CLPopoverProtocol.swift */; };
 		B53B352F2F03782300E1E929 /* CLPopoverWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53B35292F03782300E1E929 /* CLPopoverWindow.swift */; };
 		B543022C2EFCEA5000DB6DCE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543022B2EFCEA5000DB6DCE /* SceneDelegate.swift */; };
+		B5ABB9D42F220468003BF8A2 /* CLPopupBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABB9D02F220468003BF8A2 /* CLPopupBViewController.swift */; };
+		B5ABB9D52F220468003BF8A2 /* CLPopupCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABB9D12F220468003BF8A2 /* CLPopupCViewController.swift */; };
+		B5ABB9D62F220468003BF8A2 /* CLPopupNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ABB9D22F220468003BF8A2 /* CLPopupNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +123,9 @@
 		B53B35282F03782300E1E929 /* CLPopoverProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverProtocol.swift; sourceTree = "<group>"; };
 		B53B35292F03782300E1E929 /* CLPopoverWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopoverWindow.swift; sourceTree = "<group>"; };
 		B543022B2EFCEA5000DB6DCE /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B5ABB9D02F220468003BF8A2 /* CLPopupBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupBViewController.swift; sourceTree = "<group>"; };
+		B5ABB9D12F220468003BF8A2 /* CLPopupCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupCViewController.swift; sourceTree = "<group>"; };
+		B5ABB9D22F220468003BF8A2 /* CLPopupNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPopupNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +251,7 @@
 		5B09A08A2C1BED850034395A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B5ABB9D32F220468003BF8A2 /* CLPopupNavigationController */,
 				5B09A0622C1BED850034395A /* CLPopupBMIInputController */,
 				5B09A0642C1BED850034395A /* CLPopupCalendarController */,
 				5B09A06C2C1BED850034395A /* CLPopupDataPickerController */,
@@ -348,6 +355,16 @@
 				B53B35292F03782300E1E929 /* CLPopoverWindow.swift */,
 			);
 			path = CLPopoverManager;
+			sourceTree = "<group>";
+		};
+		B5ABB9D32F220468003BF8A2 /* CLPopupNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				B5ABB9D02F220468003BF8A2 /* CLPopupBViewController.swift */,
+				B5ABB9D12F220468003BF8A2 /* CLPopupCViewController.swift */,
+				B5ABB9D22F220468003BF8A2 /* CLPopupNavigationController.swift */,
+			);
+			path = CLPopupNavigationController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,6 +516,7 @@
 				5B09A0A52C1BED850034395A /* CLPopupOneInputController.swift in Sources */,
 				5BC94F0E2C1BFFAF0055C449 /* CLPopupController.swift in Sources */,
 				5BC94EEF2C1BFC120055C449 /* String+Extension.swift in Sources */,
+				B5ABB9D62F220468003BF8A2 /* CLPopupNavigationController.swift in Sources */,
 				5BC94F062C1BFEA30055C449 /* CLCalendarDelegateFlowLayout.swift in Sources */,
 				5BC94EF32C1BFDF10055C449 /* UISpringTimingParameters+Extension.swift in Sources */,
 				5B18C0732A4A815300AEDCA3 /* UIColor+Extension.swift in Sources */,
@@ -528,9 +546,11 @@
 				5B18C0722A4A815300AEDCA3 /* CLPopoverManager+Extension.swift in Sources */,
 				5BC94F072C1BFEA30055C449 /* CLCalendarFlowLayout.swift in Sources */,
 				5B09A0912C1BED850034395A /* CLPopupDataPickerController.swift in Sources */,
+				B5ABB9D42F220468003BF8A2 /* CLPopupBViewController.swift in Sources */,
 				5BC94F032C1BFEA30055C449 /* CLCalendarCell.swift in Sources */,
 				5B09A09E2C1BED850034395A /* CLPopupHudController.swift in Sources */,
 				5B09A0942C1BED850034395A /* CLFlopBottomView.swift in Sources */,
+				B5ABB9D52F220468003BF8A2 /* CLPopupCViewController.swift in Sources */,
 				5BC94F0C2C1BFEA30055C449 /* CLCalendarView.swift in Sources */,
 				5B09A0A72C1BED850034395A /* CLPopupTwoInputController.swift in Sources */,
 				5BC94F052C1BFEA30055C449 /* CLCalendarDelegate.swift in Sources */,

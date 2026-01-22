@@ -203,6 +203,14 @@ extension CLPopupController {
             }
             arrayDS.append(model)
         }
+        do {
+            let model = CLPopupModel()
+            model.title = "【测试21】自定义导航控制器+suspend - 预期:B挂起A,push到C后关闭B,A恢复"
+            model.callback = { [weak self] in
+                self?.test21_NavigationControllerWithSuspend()
+            }
+            arrayDS.append(model)
+        }
 
         // 原有示例
         do {
@@ -1210,6 +1218,41 @@ extension CLPopupController {
         }
 
         print("\n✋ 手动验证: 只看到A,B和C被去重,关闭A后D显示")
+        print(String(repeating: "=", count: 60) + "\n")
+    }
+
+    // MARK: - 测试21: 自定义导航控制器 + suspend模式
+
+    func test21_NavigationControllerWithSuspend() {
+        print("\n" + String(repeating: "=", count: 60))
+        print("【测试21】自定义导航控制器 + suspend模式")
+        print("预期: A显示 -> B(导航控制器)挂起A -> push到C -> 在C中关闭B -> A恢复")
+        print(String(repeating: "=", count: 60))
+
+        // 先显示弹窗A
+        CLPopoverManager.showOneAlert(configCallback: { config in
+            config.popoverMode = .queue
+            config.identifier = "test21_A"
+        }, title: "测试21-A", message: "我会被弹窗B挂起\n关闭B后我会恢复")
+        print("✓ 显示弹窗A (queue)")
+
+        // 0.5秒后显示弹窗B（自定义导航控制器，使用suspend模式）
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let navController = CLPopupNavigationController()
+            navController.config.popoverMode = .suspend
+            navController.config.identifier = "test21_B"
+            CLPopoverManager.show(navController)
+            print("✓ 显示弹窗B (自定义导航控制器, suspend) - A应该被挂起")
+            print("  -> 点击「Push到C控制器」进入C")
+            print("  -> 在C中点击「关闭弹窗B」关闭整个弹窗B，A恢复")
+        }
+
+        print("\n✋ 手动验证流程:")
+        print("  1. 看到弹窗A")
+        print("  2. 弹窗B出现，A消失（被挂起）")
+        print("  3. 点击「Push到C控制器」进入C")
+        print("  4. 在C中点击「关闭弹窗B」")
+        print("  5. 弹窗B关闭，弹窗A恢复显示")
         print(String(repeating: "=", count: 60) + "\n")
     }
 }
