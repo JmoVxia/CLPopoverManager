@@ -110,7 +110,7 @@ class CLPopupBViewController: UIViewController {
 
     @objc private func closeAction() {
         guard let navController = navigationController as? CLPopupNavigationController else { return }
-        CLPopoverManager.dismiss(navController.key)
+        CLPopoverManager.dismiss(forKey: navController.key)
     }
 
     func showAnimation(completion: (() -> Void)?) {

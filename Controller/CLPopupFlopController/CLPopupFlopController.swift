@@ -112,7 +112,7 @@ class CLPopupFlopController: CLPopoverController {
     }
 
     @objc func closeButtonAction() {
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 
     @objc func flopButtonAction(tap: UITapGestureRecognizer) {

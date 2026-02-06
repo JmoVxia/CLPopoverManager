@@ -172,13 +172,13 @@ extension CLPopupCalendarController {}
     func sureAction() {
         guard let start = calendarView.beginDate else { return }
         guard let end = calendarView.endDate else { return }
-        CLPopoverManager.dismiss(key) {
+        CLPopoverManager.dismiss(forKey: key, completion: {
             self.dismissCallback?(start, end)
-        }
+        })
     }
 
     func close() {
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 }
 

@@ -105,7 +105,7 @@ class CLPopupCViewController: UIViewController {
 
     @objc private func closeAction() {
         guard let navController = navigationController as? CLPopupNavigationController else { return }
-        CLPopoverManager.dismiss(navController.key)
+        CLPopoverManager.dismiss(forKey: navController.key)
     }
 
     @objc private func backAction() {

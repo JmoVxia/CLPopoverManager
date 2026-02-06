@@ -274,7 +274,7 @@ extension CLPopoverHudController {
         case .loading:
             loadingAnimation()
         }
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 
     override func dismissAnimation(completion: (() -> Void)? = nil) {

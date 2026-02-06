@@ -320,7 +320,7 @@ extension CLPopupBMIInputController {
         DispatchQueue.main.async {
             self.view.endEditing(true)
         }
-        CLPopoverManager.dismiss(key)
+        CLPopoverManager.dismiss(forKey: key)
     }
 }
 
